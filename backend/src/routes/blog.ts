@@ -61,12 +61,22 @@ blogRouter.post(``, async (c) => {
                 title: body.title,
                 content : body.content,
                 userId : c.get("userId")
+            },
+            select : {
+                title : true,
+                content : true,
+                user : {
+                    select :{
+                        name : true
+                    }
+                },
+                id: true
             }
         })
 
         console.log(post);
         return c.json({
-            msg: "successfully posted"
+            blog : post
         });
         
     } catch (err) {
@@ -123,9 +133,22 @@ blogRouter.get(`/bulk`, async (c) => {
         datasourceUrl : c.env.DATABASE_URL
     }).$extends(withAccelerate());
 
-    const posts = await prisma.post.findMany({});
+    const blogs = await prisma.post.findMany({
+        select: {
+            content: true,
+            title: true,
+            id: true,
+            user : {
+                select : {
+                    name : true
+                }
+            }
+        }
+    });
 
-    return c.json(posts);
+    return c.json({
+        blogs
+    });
 })
 
 blogRouter.get(`/:id`, async (c) => {
@@ -139,12 +162,22 @@ blogRouter.get(`/:id`, async (c) => {
     const post = await prisma.post.findUnique({
         where: {
             id: header
+        },
+        select : {
+            id : true,
+            title : true,
+            content : true,
+            user : {
+                select : {
+                    name : true
+                }
+            }
         }
     });
 
     if(post){
         return c.json({
-            "fetched post" : post
+            "blog" : post
         })
     }
     else {

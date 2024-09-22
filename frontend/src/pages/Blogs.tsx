@@ -1,14 +1,25 @@
 import { Appbar } from "../components/Appbar"
 import { BlogCard } from "../components/BlogCard"
+import { BlogSkeleton } from "../components/Blogskeleton";
 import { useBlogs } from "../hooks/useBlogs"
 
 export const Blogs = () => {
 
-    const {loading, blogs} = useBlogs();
+    const { loading, blogs } = useBlogs();
 
-    if(loading){
-        <div>
-            loading...
+    if (loading) {
+        return <div>
+
+            <Appbar/>
+            <div className="flex justify-center">
+                <div className="flex justify-center flex-col">
+                    <BlogSkeleton />
+                    <BlogSkeleton />
+                    <BlogSkeleton />
+                    <BlogSkeleton />
+                    <BlogSkeleton />
+                </div>
+            </div>
         </div>
     }
 
@@ -16,31 +27,16 @@ export const Blogs = () => {
         <div >
             <Appbar />
             <div className="flex justify-center">
-                <div className="max-w-xl">
-                    <BlogCard
-                        authorName="Dhruv"
-                        title="How a dumb engineering student scored big winnning a 100L lottery"
-                        content=" How a dumb engineering student scored big winnning a hundred L lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery "
+                <div className="">
+
+                    {blogs.map(blog => <BlogCard
+                        authorName={blog.user.name || "Anonymous"}
+                        title={blog.title}
+                        content={blog.content}
                         publishedDate="23/2/24"
-                    />
-                    <BlogCard
-                        authorName="Dhruv"
-                        title="How a dumb engineering student scored big winnning a 100L lottery"
-                        content=" How a dumb engineering student scored big winnning a hundred L lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery "
-                        publishedDate="23/2/24"
-                    />
-                    <BlogCard
-                        authorName="Dhruv"
-                        title="How a dumb engineering student scored big winnning a 100L lottery"
-                        content=" How a dumb engineering student scored big winnning a hundred L lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery "
-                        publishedDate="23/2/24"
-                    />
-                    <BlogCard
-                        authorName="Dhruv"
-                        title="How a dumb engineering student scored big winnning a 100L lottery"
-                        content=" How a dumb engineering student scored big winnning a hundred L lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery How a dumb engineering student scored big winnning a hundred lottery "
-                        publishedDate="23/2/24"
-                    />
+                        id={blog.id}
+                    />)}
+
                 </div>
             </div>
         </div>
