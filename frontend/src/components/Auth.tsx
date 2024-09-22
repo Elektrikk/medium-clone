@@ -18,16 +18,23 @@ export const Auth = ({ type }: { type: "singup" | "signin" }) => {
     async function sendRequest() {
         try{
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "singup" ? "signup" : "signin" }`, postInputs);
-            const jwt= await response.data.jwt;
-            localStorage.setItem("token", "Bearer "+jwt);
-            navigate("/blogs");
+
+            if(response.data.message && response.data.message.name=="PrismaClientKnownRequestError"){
+                throw new Error('USED EMAIL USED');
+            }
+            else{
+                const jwt= await response.data.jwt;
+                localStorage.setItem("token", "Bearer "+jwt);
+                navigate("/blogs");
+            }
+            
         } catch (err) {
             //ALERT THE USER THAT THE REQUEST FAILED
             if(type === "signin")
             alert("incorrect email or password");
             else
             alert(`Please ensure that:
-1) You have entered a valid email.
+1) You have entered a valid unused email.
 2) The password provided has minimum 6 characters.`)
             console.log(err);
         }
