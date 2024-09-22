@@ -23,7 +23,12 @@ export const Auth = ({ type }: { type: "singup" | "signin" }) => {
             navigate("/blogs");
         } catch (err) {
             //ALERT THE USER THAT THE REQUEST FAILED
-            alert("failed");
+            if(type === "signin")
+            alert("incorrect email or password");
+            else
+            alert(`Please ensure that:
+1) You have entered a valid email.
+2) The password provided has minimum 6 characters.`)
             console.log(err);
         }
     }
