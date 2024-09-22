@@ -5,18 +5,18 @@ import { Avatar } from "./BlogCard"
 export const Blogview = ({ blog }: { blog: Blog }) => {
     return <div>
         <Appbar />
-        <div className="flex justify-center">
+        <div className="flex justify-center p-4">
             <div className="grid grid-cols-12 px-2 pt-10 max-w-screen-lg w-full ">
 
-                <div className="col-span-8 ">
+                <div className="col-span-12 md:col-span-8 ">
 
-                    <div className="text-5xl font-bold ">
+                    <div className="text-3xl md:text-5xl font-bold ">
                         {blog.title}
                     </div>
                     <div className="text-slate-400 py-3 font-normal">
                         Post on 2nd December, 2023
                     </div>
-                    <div className="pt-2">
+                    <div className="py-4">
                         {blog.content}
                     </div>
 
@@ -25,7 +25,7 @@ export const Blogview = ({ blog }: { blog: Blog }) => {
 
                 </div>
 
-                <div className="col-span-3">
+                <div className="col-span-12 md:col-span-3">
                     <div className="text-lg text-slate-500">
                         Author
                     </div>

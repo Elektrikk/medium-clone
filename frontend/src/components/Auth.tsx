@@ -28,7 +28,7 @@ export const Auth = ({ type }: { type: "singup" | "signin" }) => {
         }
     }
 
-    return <div className="h-screen flex justify-center flex-col">
+    return <div className="h-screen flex justify-center flex-col p-7">
         <div className="flex justify-center">
             <div className="">
 
