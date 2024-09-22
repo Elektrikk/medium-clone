@@ -6,7 +6,7 @@ export const Blogview = ({ blog }: { blog: Blog }) => {
     return <div>
         <Appbar />
         <div className="flex justify-center">
-            <div className="grid grid-cols-12 px-10 pt-10 max-w-screen-lg w-full ">
+            <div className="grid grid-cols-12 px-2 pt-10 max-w-screen-lg w-full ">
 
                 <div className="col-span-8 ">
 
@@ -21,7 +21,11 @@ export const Blogview = ({ blog }: { blog: Blog }) => {
                     </div>
 
                 </div>
-                <div className="col-span-4">
+                <div className="col-span-1">
+
+                </div>
+
+                <div className="col-span-3">
                     <div className="text-lg text-slate-500">
                         Author
                     </div>
