@@ -1,3 +1,4 @@
+import { Alert } from "../components/Alert";
 import { Appbar } from "../components/Appbar"
 import { BlogCard } from "../components/BlogCard"
 import { BlogSkeleton } from "../components/BlogSkeleton";
@@ -10,7 +11,7 @@ export const Blogs = () => {
     if (loading) {
         return <div>
 
-            <Appbar/>
+            <Appbar />
             <div className="flex justify-center">
                 <div className="flex justify-center flex-col">
                     <BlogSkeleton />
@@ -28,14 +29,20 @@ export const Blogs = () => {
             <Appbar />
             <div className="flex justify-center">
                 <div className="">
-
-                    {blogs.map(blog => <BlogCard
-                        authorName={blog.user.name || "Anonymous"}
-                        title={blog.title}
-                        content={blog.content}
-                        publishedDate="23/2/24"
-                        id={blog.id} 
-                    />)}
+                    {blogs.length>0 ? (
+                        blogs.map(blog => (
+                            <BlogCard
+                                key={blog.id}  // Add a key to avoid warnings
+                                authorName={blog.user?.name || "Anonymous"}  // Use optional chaining for user
+                                title={blog.title}
+                                content={blog.content}
+                                publishedDate="23/2/24"
+                                id={blog.id}
+                            />
+                        ))
+                    ) : (
+                        <Alert/>
+                    )}
 
                 </div>
             </div>

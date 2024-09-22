@@ -25,6 +25,9 @@ export const useBlogs = () => {
                 setBlogs(response.data.blogs);
                 setLoading(false);
             })
+            .catch(err => {
+                setLoading(false);
+            }) 
     })
 
     return{
